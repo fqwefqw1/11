@@ -32,5 +32,9 @@ jobs:
           SERVER_ID: ${{ secrets.SERVER_ID }}
         run: python renew.py
 
-      - name: فعال نگه داشتن دائمی اکشن
-        uses: gautamkrishnar/keepalive-workflow@v1
+      - name: فعال نگه داشتن خودکار
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git commit --allow-empty -m "keepalive" || exit 0
+          git push || exit 0
